@@ -1,0 +1,14 @@
+sources:
+  directory:
+    kind: sqlite
+    database: directory.db
+tools:
+  search-users:
+    kind: sqlite-sql
+    source: directory
+    description: Search residents by name
+    parameters:
+      - name: first_name
+        type: string
+        description: The first name of the resident to search for
+    statement: SELECT * FROM residents WHERE first_name LIKE ?
