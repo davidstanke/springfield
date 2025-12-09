@@ -1,0 +1,5 @@
+# exclude the binary (it will be provided by the base image)
+toolbox
+
+# exclude the csv files which are just workspaces
+*.csv

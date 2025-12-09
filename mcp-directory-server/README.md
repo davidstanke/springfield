@@ -1,5 +1,15 @@
 MCP server provides directory information about the residents of Springfield.
 
+Database server:
+`35.223.35.223`
+table: `residents`
+
+admin user:
+- `postgres` / `*64z)^8TSh]f{7@.`
+
+read-only user:
+- `springfield` / `b2zca-EoujGvjRwcg9UW`
+
 To run the server:
 1. Download the appropriate version of the toolbox
   ```sh
@@ -12,3 +22,4 @@ To run the server:
   ./toolbox --tools-file "tools.yaml"
   ```
   
+Deployed to cloud: `https://toolbox-617191421982.us-central1.run.app/`

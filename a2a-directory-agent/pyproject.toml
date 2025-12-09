@@ -1,0 +1,13 @@
+[project]
+name = "a2a-directory-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "uvicorn",
+    "google-adk",
+    "a2a-sdk",
+    "python-dotenv",
+    "toolbox-core",
+]

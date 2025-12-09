@@ -2,3 +2,4 @@ uvicorn
 google-adk
 a2a-sdk
 python-dotenv
+toolbox-core

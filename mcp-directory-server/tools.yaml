@@ -1,14 +1,18 @@
 sources:
   directory:
-    kind: sqlite
-    database: directory.db
+    kind: postgres
+    host: 35.223.35.223
+    port: 5432
+    database: residents
+    user: springfield
+    password: b2zca-EoujGvjRwcg9UW
 tools:
   search-users:
-    kind: sqlite-sql
+    kind: postgres-sql
     source: directory
     description: Search residents by name
     parameters:
       - name: first_name
         type: string
         description: The first name of the resident to search for
-    statement: SELECT * FROM residents WHERE first_name LIKE ?
+    statement: SELECT * FROM residents WHERE first_name ILIKE $1;
