@@ -44,7 +44,7 @@ USER appuser
 ENV A2A_HOST=0.0.0.0
 
 # Expose the port
-EXPOSE 8080
+EXPOSE 8001
 
 # Run uvicorn for a2a agent card server
-ENTRYPOINT ["/bin/sh", "-c", "uvicorn agent:a2a_app --host $A2A_HOST --port 8080"]
+ENTRYPOINT ["/bin/sh", "-c", "uvicorn agent:a2a_app --host $A2A_HOST --port 8001"]

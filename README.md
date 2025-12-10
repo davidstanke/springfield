@@ -64,6 +64,7 @@ gcloud run deploy springfield-toolbox \
 ```
 cd a2a-directory-agent
 export PROJECT_ID=$(gcloud config get-value project)
+export PROJECT_NUMBER=$(gcloud projects list --filter="$(gcloud config get-value project)" --format="value(PROJECT_NUMBER)")
 gcloud builds submit . --tag=us-central1-docker.pkg.dev/$PROJECT_ID/springfield/a2a-directory-agent
 
 gcloud run deploy a2a-directory-agent \
@@ -74,5 +75,6 @@ gcloud run deploy a2a-directory-agent \
   --memory=2Gi \
   --network=default \
   --subnet=default \
-  --set-env-vars=GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=TRUE,MCP_TOOLBOX_URL=$MCP_TOOLBOX_URL,DJANGO=false,TOOLBOX_URL=https://springfield-toolbox-617191421982.us-central1.run.app,HOST_OVERRIDE=https://a2a-directory-agent-$PROJECT_NUMBER.us-central1.run.app
+  --port=8001 \
+  --set-env-vars=GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=TRUE,TOOLBOX_URL=https://springfield-toolbox-$PROJECT_NUMBER.us-central1.run.app,AGENT_URL=https://a2a-directory-agent-$PROJECT_NUMBER.us-central1.run.app/
 ```
