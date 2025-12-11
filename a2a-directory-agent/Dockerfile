@@ -14,5 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container
 COPY . .
 
+EXPOSE 8000
+
 # Define the command to run the application when the container starts
-CMD ["python", "-m", "uvicorn", "agent:a2a_app","--port","8000"]
+CMD ["python","-m","uvicorn","agent:a2a_app","--host","0.0.0.0","--port","8000"]
