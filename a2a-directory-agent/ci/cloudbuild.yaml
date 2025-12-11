@@ -1,0 +1,19 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build','.','-t','us-central1-docker.pkg.dev/$PROJECT_ID/springfield/a2a-directory-agent']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push','us-central1-docker.pkg.dev/$PROJECT_ID/springfield/a2a-directory-agent']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    script: |
+      gcloud run deploy a2a-directory-agent \
+      --image=us-central1-docker.pkg.dev/$PROJECT_ID/springfield/a2a-directory-agent:latest \
+      --region=us-central1 \
+      --allow-unauthenticated \
+      --cpu=4 \
+      --memory=2Gi \
+      --network=default \
+      --subnet=default \
+      --port=8001 \
+      --set-env-vars=GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=TRUE,TOOLBOX_URL=https://springfield-toolbox-$PROJECT_NUMBER.us-central1.run.app,AGENT_URL=https://a2a-directory-agent-$PROJECT_NUMBER.us-central1.run.app/
+options:
+  automapSubstitutions: true
