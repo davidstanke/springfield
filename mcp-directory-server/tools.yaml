@@ -12,7 +12,12 @@ tools:
     source: directory
     description: Search residents by name
     parameters:
-      - name: first_name
+      - name: name
         type: string
-        description: The first name of the resident to search for
-    statement: SELECT * FROM residents WHERE first_name ILIKE '%$1%';
+        description: The name of the resident to search for (can match first, middle, or last name)
+    statement: | 
+      SELECT * FROM residents 
+      WHERE first_name ILIKE '%$1%'
+      OR last_name ILIKE '%$1%'
+      OR middle_name ILIKE '%$1%'
+      ;
