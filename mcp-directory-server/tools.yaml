@@ -15,4 +15,4 @@ tools:
       - name: first_name
         type: string
         description: The first name of the resident to search for
-    statement: SELECT * FROM residents WHERE first_name ILIKE $1;
+    statement: SELECT * FROM residents WHERE first_name ILIKE '%$1%';
