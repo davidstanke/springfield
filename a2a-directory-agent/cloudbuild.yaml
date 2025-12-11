@@ -14,7 +14,7 @@ steps:
       --memory=2Gi \
       --network=default \
       --subnet=default \
-      --port=8001 \
+      --port=8000 \
       --set-env-vars=GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=TRUE,TOOLBOX_URL=https://springfield-toolbox-$PROJECT_NUMBER.us-central1.run.app,AGENT_URL=https://a2a-directory-agent-$PROJECT_NUMBER.us-central1.run.app/
 options:
   automapSubstitutions: true
