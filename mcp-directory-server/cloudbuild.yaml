@@ -5,6 +5,8 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push','us-central1-docker.pkg.dev/$PROJECT_ID/springfield/directory-toolbox']
   - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['secrets','versions','add','springfield-directory-tools','--data-file=tools.yaml']
+  - name: 'gcr.io/cloud-builders/gcloud'
     script: |
       gcloud run deploy springfield-toolbox \
       --image us-central1-docker.pkg.dev/$PROJECT_ID/springfield/directory-toolbox:latest \
