@@ -7,7 +7,7 @@ sources:
     user: springfield
     password: b2zca-EoujGvjRwcg9UW
 tools:
-  search-users:
+  search-by-name:
     kind: postgres-sql
     source: directory
     description: Search residents by name
@@ -20,4 +20,19 @@ tools:
       WHERE first_name ILIKE CONCAT('%', $1, '%')
       OR last_name ILIKE CONCAT('%', $1, '%')
       OR middle_name ILIKE CONCAT('%', $1, '%')
+      ;
+  search-by-age:
+    kind: postgres-sql
+    source: directory
+    description: Get residents by age range
+    parameters:
+      - name: min_age
+        type: integer
+        description: Minimum age of residents to return
+      - name: max_age
+        type: integer
+        description: Maximum age of residents to return
+    statement: | 
+      SELECT * FROM residents 
+      WHERE age >= $1 AND age <= $2
       ;

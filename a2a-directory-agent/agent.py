@@ -28,7 +28,13 @@ agent_card = AgentCard(
         {
             "description": "Search residents by name\n\nArgs:\n first_name (str): The first name of the resident to search for",
             "id": "springfield_directory-search-users",
-            "name": "search-users",
+            "name": "search-by-name",
+            "tags": ["llm", "tools"],
+        },
+        {
+            "description": "Search residents by age\n\nArgs:\n min_age and max_age",
+            "id": "springfield_directory-search-by-age",
+            "name": "search-by-age",
             "tags": ["llm", "tools"],
         },
     ],
