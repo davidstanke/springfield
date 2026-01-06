@@ -10,7 +10,8 @@ admin user:
 read-only user:
 - `springfield` / `b2zca-EoujGvjRwcg9UW`
 
-To run the server:
+## Running the toolbox service locally
+
 1. Download the appropriate version of the toolbox
   ```sh
   export OS="linux/amd64" # one of linux/amd64, darwin/arm64, darwin/amd64, or windows/amd64
@@ -21,5 +22,12 @@ To run the server:
   ```sh
   ./toolbox --tools-file "tools.yaml"
   ```
+  The server will be running at `0.0.0.0:5000`
   
-Deployed to cloud: `https://toolbox-617191421982.us-central1.run.app/`
+## To deploy to Cloud Run
+`gcloud builds submit .`
+
+Deployed service: `https://toolbox-617191421982.us-central1.run.app/`
+
+## Running locally as a container
+Blergh, I can't figure out how to do this. When I run it and try to curl it, I get `Recv failure: Connection reset by peer`
