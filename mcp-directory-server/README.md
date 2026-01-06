@@ -25,6 +25,36 @@ read-only user:
   The server will be running at `0.0.0.0:5000`
   
 ## To deploy to Cloud Run
+
+### Pre-req
+
+```
+gcloud services enable run.googleapis.com \
+   cloudbuild.googleapis.com \
+   artifactregistry.googleapis.com \
+   iam.googleapis.com \
+   secretmanager.googleapis.com
+
+gcloud artifacts repositories create springfield \
+  --repository-format=docker \
+  --location=us-central1 \
+  --description="Repository for Springfield ADK agents" \
+  --project=$PROJECT_ID
+                       
+gcloud iam service-accounts create springfield-toolbox-identity
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:springfield-toolbox-identity@$PROJECT_ID.iam.gserviceaccount.com \
+    --role roles/secretmanager.secretAccessor
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:springfield-toolbox-identity@$PROJECT_ID.iam.gserviceaccount.com \
+    --role roles/cloudsql.client
+
+gcloud secrets create springfield-directory-tools --data-file=tools.yaml
+```
+
+### Deploy
 `gcloud builds submit .`
 
 Deployed service: `https://toolbox-617191421982.us-central1.run.app/`
