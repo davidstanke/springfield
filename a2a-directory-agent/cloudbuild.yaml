@@ -1,7 +1,6 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build','.','-t','us-central1-docker.pkg.dev/$PROJECT_ID/springfield/a2a-directory-agent']
-    dir: 'a2a-directory-agent'
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push','us-central1-docker.pkg.dev/$PROJECT_ID/springfield/a2a-directory-agent']
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -15,7 +14,7 @@ steps:
       --network=default \
       --subnet=default \
       --port=8000 \
-      --set-env-vars=GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=TRUE,TOOLBOX_URL=https://springfield-toolbox-$PROJECT_NUMBER.us-central1.run.app,AGENT_URL=https://a2a-directory-agent-$PROJECT_NUMBER.us-central1.run.app/
+      --set-env-vars=GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=us-central1,GOOGLE_GENAI_USE_VERTEXAI=TRUE,TOOLBOX_URL=https://springfield-toolbox-$PROJECT_NUMBER.us-central1.run.app,AGENT_HOST=a2a-directory-agent-$PROJECT_NUMBER.us-central1.run.app,AGENT_PORT=443,AGENT_PROTOCOL=https
 options:
   automapSubstitutions: true
   logging: CLOUD_LOGGING_ONLY
