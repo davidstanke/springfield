@@ -8,37 +8,11 @@ from a2a.types import AgentCard
 
 load_dotenv()
 
-client = ToolboxSyncClient(os.getenv("TOOLBOX_URL","TOOLBOX_URL_NOT_SET"))
+agent_host = os.getenv("AGENT_HOST", "localhost")
+agent_port = os.getenv("AGENT_PORT", 8000)
+agent_protocol = os.getenv("AGENT_PROTOCOL", "http")
 
-agent_card = AgentCard(
-    name="Simpsons directory agent",
-    description="An agent to query a database of the residents of Springfield (from The Simpsons).",
-    url=os.getenv("AGENT_URL","http://127.0.0.1:8000"),
-    version="1.0.1",
-    defaultInputModes=["text/plain"],
-    defaultOutputModes=["text/plain"],
-    capabilities={},
-    skills=[
-        {
-            "description": "An agent that can work with a directory of Springfield residents. I am a helpful AI assistant designed to provide accurate and useful information about the residents of Springfield.",
-            "id": "springfield_directory",
-            "name": "model",
-            "tags": ["llm"],
-        },
-        {
-            "description": "Search residents by name\n\nArgs:\n first_name (str): The first name of the resident to search for",
-            "id": "springfield_directory-search-users",
-            "name": "search-by-name",
-            "tags": ["llm", "tools"],
-        },
-        {
-            "description": "Search residents by age\n\nArgs:\n min_age and max_age",
-            "id": "springfield_directory-search-by-age",
-            "name": "search-by-age",
-            "tags": ["llm", "tools"],
-        },
-    ],
-)
+client = ToolboxSyncClient(os.getenv("TOOLBOX_URL", "TOOLBOX_URL_NOT_SET"))
 
 # Define your agent, including its capabilities/tools
 root_agent = Agent(
@@ -50,4 +24,5 @@ root_agent = Agent(
 )
 
 # Make the agent A2A-compatible
-a2a_app = to_a2a(root_agent, agent_card=agent_card)
+# a2a_app = to_a2a(root_agent, agent_card=agent_card)
+a2a_app = to_a2a(root_agent, host=agent_host, port=agent_port, protocol=agent_protocol)
